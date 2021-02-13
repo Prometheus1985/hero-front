@@ -1,0 +1,33 @@
+.menu {
+  position: absolute;
+  height: 5rem;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 4.5rem;
+  color: white;
+  width: 90%;
+
+  &__logo {
+    width: 10rem;
+  }
+
+  &__list {
+    display: flex;
+
+    & a {
+      padding: 0.5rem 0.9rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.801);
+      text-decoration: none;
+      transition: all 0.2s linear;
+
+      &:hover {
+        border-bottom: 1px solid $mainColor;
+        color: white;
+      }
+    }
+  }
+}

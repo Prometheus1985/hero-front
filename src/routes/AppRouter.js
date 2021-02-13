@@ -5,9 +5,12 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
+import PrivateRoute from '../components/PrivateRoute'
+import Dashboard from '../pages/Dashboard'
+import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
-import DashboardRoutes from './DashboardRoutes'
+import Software from '../pages/Software'
 
 const AppRouter = () => {
   return (
@@ -15,9 +18,11 @@ const AppRouter = () => {
       <div>
         <Switch>
           <Route exact path='/register' component={Register} />
+          <Route path='/home' component={Home} />
           <Route exact path='/login' component={Login} />
-          <Route path='/' component={DashboardRoutes} />
-          <Redirect to='/login' />
+          <Route path='/software' component={Software} />
+          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <Redirect to='/home' />
         </Switch>
       </div>
     </Router>

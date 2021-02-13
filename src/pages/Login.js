@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import Axios from 'axios'
 
-const Login = () => {
+const Login = (props) => {
   const [login, setLogin] = useState({ email: '', password: '' })
 
   const { email, password } = login
@@ -11,9 +12,23 @@ const Login = () => {
     setLogin({ ...login, [name]: value })
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    console.log(login)
+    const { email, password } = login
+    await Axios({
+      method: 'POST',
+      baseURL: 'http://localhost:8080',
+      url: '/users/login',
+      data: { email, password },
+    })
+      .then(({ data }) => {
+        localStorage.setItem('token', data.token)
+        props.history.push('/dashboard')
+      })
+      .catch((err) => {
+        localStorage.removeItem('token')
+        console.log(err)
+      })
   }
 
   return (

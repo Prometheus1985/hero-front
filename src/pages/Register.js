@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import Axios from 'axios'
 
-const Register = () => {
+const Register = (props) => {
   const [register, setRegister] = useState({
     name: '',
     email: '',
@@ -17,9 +18,25 @@ const Register = () => {
     setRegister({ ...register, [name]: value })
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
-    console.log(register)
+
+    const data = { name, email, password, height, weight }
+
+    await Axios({
+      method: 'POST',
+      baseURL: 'http://localhost:8080',
+      url: '/users/register',
+      data: data,
+    })
+      .then(({ data }) => {
+        localStorage.setItem('token', data.token)
+        props.history.push('/dashboard')
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
